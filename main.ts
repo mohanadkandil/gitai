@@ -96,9 +96,7 @@ export async function main() {
   // generate commit message
   const generatedCommit = await generateCommitMessage(prompt);
 
-  console.log(
-    chalk.bold("Generated commit message: ") + generatedCommit + "\n"
-  );
+  console.log(chalk.bold(`${generatedCommit}`));
 
   const commitConfirmation = async () => {
     const answer = await inquirer.prompt([
