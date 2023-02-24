@@ -8,6 +8,9 @@ import { createSpinner } from "nanospinner";
 // OPENAI API Key
 let OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 
+// sleep function to wait for 2 seconds before commiting
+const sleep = (ms = 2000) => new Promise((resolve) => setTimeout(resolve, ms));
+
 // main commit function that sends the request to openai
 async function generateCommitMessage(prompt: string) {
   const payload = {
@@ -107,20 +110,20 @@ export async function main() {
       },
     ]);
 
-    return handleAnswer(answer.commit === "n");
+    return handleAnswer(answer.commit === "y" || answer.commit === "Y");
   };
 
   // handling answer function that will wait for 2 secs and get the message if the commit is confirmed or not
   const handleAnswer = async (isCorrect) => {
-    const spinner = createSpinner("Committing...");
-    spinner.start();
+    const spinner = createSpinner("Committing...").start();
+    await sleep();
 
     if (isCorrect) {
-      spinner.error({ text: "Commit cancelled" });
-      process.exit(1);
-    } else {
       spinner.success({ text: "Committing..." });
       execSync(`git commit -m "${generatedCommit}"`);
+    } else {
+      spinner.error({ text: "Commit cancelled" });
+      process.exit(1);
     }
   };
 
