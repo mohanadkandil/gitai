@@ -3,6 +3,7 @@ import chalk from "chalk";
 import { execSync } from "child_process";
 import inquirer from "inquirer";
 import fetch from "node-fetch";
+import { createSpinner } from "nanospinner";
 
 // OPENAI API Key
 let OPENAI_API_KEY = process.env.OPENAI_API_KEY;
@@ -96,19 +97,33 @@ export async function main() {
     chalk.bold("Generated commit message: ") + generatedCommit + "\n"
   );
 
-  const commitConfirmation = inquirer.prompt([
-    {
-      name: "commit",
-      message: "Would you like to commit this message? (Y / n)",
-      choices: ["Y", "Y", "n"],
-      default: "y",
-    },
-  ]);
+  const commitConfirmation = async () => {
+    const answer = await inquirer.prompt([
+      {
+        name: "commit",
+        message: "Would you like to commit this message? (Y / n)",
+        choices: ["Y", "y", "n"],
+        default: "y",
+      },
+    ]);
 
-  if (commitConfirmation.commit === "n") {
-    console.log(chalk.white("Commit cancelled"));
-    process.exit(1);
-  }
+    return handleAnswer(answer.commit === "n");
+  };
 
-  execSync(`git commit -m "${generatedCommit}"`);
+  // handling answer function that will wait for 2 secs and get the message if the commit is confirmed or not
+  const handleAnswer = async (isCorrect) => {
+    const spinner = createSpinner("Committing...");
+    spinner.start();
+
+    if (isCorrect) {
+      spinner.error({ text: "Commit cancelled" });
+      process.exit(1);
+    } else {
+      spinner.success({ text: "Committing..." });
+      execSync(`git commit -m "${generatedCommit}"`);
+    }
+  };
+
+  // if the commit message is not empty, ask for confirmation and commit
+  if (generatedCommit !== "") await commitConfirmation();
 }
