@@ -120,7 +120,7 @@ export async function main() {
 
     if (isCorrect) {
       spinner.success({ text: "Committing..." });
-      // execSync(`git commit -m "${generatedCommit}"`);
+      execSync(`git commit -m "${generatedCommit}"`);
     } else {
       spinner.error({ text: "Commit cancelled" });
       process.exit(1);
