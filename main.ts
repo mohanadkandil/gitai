@@ -115,11 +115,11 @@ export async function main() {
 
   // handling answer function that will wait for 2 secs and get the message if the commit is confirmed or not
   const handleAnswer = async (isCorrect) => {
-    const spinner = createSpinner("Committing...").start();
+    const spinner = createSpinner("Checking...").start();
     await sleep();
 
     if (isCorrect) {
-      spinner.success({ text: "Committing..." });
+      spinner.success({ text: "Done" });
       execSync(`git commit -m "${generatedCommit}"`);
     } else {
       spinner.error({ text: "Commit cancelled" });
