@@ -1,6 +1,6 @@
 {
   "name": "gitai",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Generates your git commit messages for you with AI",
   "main": "bin/index.js",
   "files": [
