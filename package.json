@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "description": "Generates your git commit messages for you with AI",
   "main": "bin/index.js",
-  "bin": {
-    "aicommits": "bin/index.js"
-  },
-  "repository": "https://github.com/Nutlope/aicommits",
-  "author": "Hassan El Mghari (@nutlope)",
+  "files": [
+    "bin"
+  ],
+  "bin": "bin/index.js",
+  "repository": "https://github.com/mohanadkandil/gitai",
+  "author": "Mohanad Kandil (@mohanadkandil)",
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^18.13.0",
