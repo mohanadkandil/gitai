@@ -6,7 +6,6 @@ import fetch from "node-fetch";
 
 // OPENAI API Key
 let OPENAI_API_KEY = process.env.OPENAI_API_KEY;
-console.log("🚀 ~ file: main.ts:9 ~ OPENAI_API_KEY:", OPENAI_API_KEY);
 
 // main commit function that sends the request to openai
 async function generateCommitMessage(prompt: string) {
@@ -52,16 +51,16 @@ export async function main() {
   // check if this is a git repository
   try {
     execSync("git rev-parse --is-inside-work-tree", {
+      encoding: "utf8",
       stdio: "ignore",
-      encoding: "utf-8",
     });
-  } catch (e) {
+  } catch {
     console.error(chalk.red("This is not a git repository."));
     process.exit(1);
   }
 
   const diff = execSync(
-    "git diff --cached . ':(exclude)package-lock.json' ':(exclude)yarn.lock'",
+    'git diff --cached . ":(exclude)package-lock.json" ":(exclude)yarn.lock" ":(exclude)pnpm-lock.yaml"',
     {
       encoding: "utf8",
     }
