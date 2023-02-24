@@ -1,0 +1,29 @@
+{
+  "name": "gitai",
+  "version": "1.0.0",
+  "description": "Generates your git commit messages for you with AI",
+  "main": "bin/index.js",
+  "bin": {
+    "aicommits": "bin/index.js"
+  },
+  "repository": "https://github.com/Nutlope/aicommits",
+  "author": "Hassan El Mghari (@nutlope)",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^18.13.0",
+    "typescript": "^4.9.5"
+  },
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "inquirer": "^8.0.0",
+    "node-fetch": "^2.6.9"
+  },
+  "keywords": [
+    "ai",
+    "git",
+    "commit"
+  ]
+}
