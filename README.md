@@ -2,6 +2,7 @@
   <div>
     <img src="https://uploads-ssl.webflow.com/634442b91c55d55d1d279fd6/634442b91c55d5562327a005_rasayel-logo.svg" alt="rasayel"/>
     <h1 align="center">Rasayel Task</h1>
+    <a href="https://rasayel-mohanadkandil.vercel.app/">Live preview</a>
   </div>
 </div>
 
